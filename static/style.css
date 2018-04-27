@@ -1,0 +1,31 @@
+
+path {
+      stroke-width: 2;
+      fill: none;
+      stroke: #000080;
+    }
+.axis path, .axis line {
+      fill: none;
+      stroke: blue;
+      stroke-width: 1;
+      shape-rendering: crispEdges;
+    }
+.area {
+      fill: #F0F8FF;
+      stroke-width: 0;
+    }
+input[type = "text"] {
+     border: 0;
+     outline: 0;
+     border-bottom: 2px solid Gray;
+}
+input[type = "textarea"] {
+     border: 0;
+     outline: 0;
+     border-bottom: 2px solid Gray;
+}
+input[type = "number"] {
+     border: 0;
+     outline: 0;
+     border-bottom: 2px solid Gray;
+}

@@ -1,0 +1,195 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/flatly/bootstrap.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.js"></script>
+    <style>
+        input {
+            width: 500px;
+            height: 30px;
+            background-color: #fafafa;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            border: 1px solid #cccccc;
+            margin-bottom: 10px;
+            padding: 5px;
+            font-size: 1.1em;
+        }
+        
+        .alert {
+            height: 5%;
+            width: 35%;
+        }
+        
+        h6   {color: blue;}
+    </style>
+</head>
+
+<body>
+
+    <br>
+    <br>
+    <div class="container">
+        <center><img src="/static/logo.jpg" alt="Daniel Spears"></center><br><br>
+        {% for message in form.autojob.errors %}
+    <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h5 class="alert-heading">{{message}}</h5>
+    </div> {% endfor %}
+        <h6>Employer#1</h6>
+        <form action="{{ url_for('job_look') }}" method="POST" enctype="multipart/form-data">
+              <div class="form-group">
+        <div class="row justify-content-end">
+            <div class="col">
+                    <br>{{ form.autojob.label }}:
+                    <br> {{ form.autojob }}
+                </div>
+             <div class="col">
+                    <br> {{ form.company.label }}:
+                    <br> {{ form.company }}
+                </div>
+            </div>
+              <div class="row justify-content-end">
+            <div class="col">
+                    <br> {{ form.compcity.label }}:
+                    <br> {{ form.compcity }}
+                </div>
+                <div class="col">
+                    <br>{{ form.compstate.label }}:
+                    <br>{{ form.compstate }}
+                </div>
+            </div>
+              <div class="row justify-content-end">
+            <div class="col">
+            <br> {{ form.compyears.label }}:
+            <br> {{ form.compyears }}
+                </div>
+            </div>
+            <br> 
+            {% for message in form.autojob2.errors %}
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h5 class="alert-heading">{{message}}</h5>
+            </div>
+            {% endfor %}
+            
+            
+            <h6>Employer#2</h6> 
+                <div class="row justify-content-end">
+            <div class="col">
+                    <br>{{ form.autojob2.label }}:
+                    <br> {{ form.autojob2 }}
+                </div>
+                <div class="col">
+                    <br> {{ form.company2.label }}:
+                    <br> {{ form.company2 }}
+                </div>
+            </div>
+              <div class="row justify-content-end">
+            <div class="col">
+                    <br> {{ form.compcity2.label }}:
+                    <br> {{ form.compcity2 }}
+                </div>
+                <div class="col">
+                    <br>{{ form.compstate2.label }}:
+                    <br>{{ form.compstate2 }}
+                </div>
+            </div>
+        <div class="row justify-content-end">
+            <div class="col">
+            <br> {{ form.compyears2.label }}:
+            <br> {{ form.compyears2 }}
+                </div>
+            </div>
+                  </div>
+            <br>
+            {% for message in form.autojob3.errors %}
+            <div class="alert alert-dismissible alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h5 class="alert-heading">{{message}}</h5>
+            </div> 
+            {% endfor %}
+            
+             <h6>Employer#3</h6> 
+                <div class="row justify-content-end">
+            <div class="col">
+                    <br>{{ form.autojob3.label }}:
+                    <br> {{ form.autojob3 }}
+                </div>
+                <div class="col">
+                    <br> {{ form.company3.label }}:
+                    <br> {{ form.company3 }}
+                </div>
+            </div>
+              <div class="row justify-content-end">
+            <div class="col">
+                    <br> {{ form.compcity3.label }}:
+                    <br> {{ form.compcity3 }}
+                </div>
+                <div class="col">
+                    <br>{{ form.compstate3.label }}:
+                    <br>{{ form.compstate3 }}
+                </div>
+            </div>
+        <div class="row justify-content-end">
+            <div class="col">
+            <br> {{ form.compyears3.label }}:
+            <br> {{ form.compyears3 }}
+                </div>
+            </div>
+                
+            <!--             <h2>Employer#3</h2>
+        {{ form.autojob2.label }}:   {{ form.autojob2}}<br>
+        {{ form.company3.label }}:   {{ form.company3 }}<br>
+        {{ form.compcity3.label }}:   {{ form.compcity3 }}<br>
+        {{ form.compstate3.label }}:   {{ form.compstate3 }}<br>
+        {{ form.compyears3.label }}:   {{ form.compyears3 }}<br>
+-->
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+            <script>
+                $(function() {
+                    $.ajax({
+                        url: '{{ url_for("autocomplete") }}'
+                    }).done(function(data) {
+                        $('#job_autocomplete').autocomplete({
+                            source: data,
+                            minLength: 3
+                        });
+                    });
+                });
+            </script>
+            <script>
+                $(function() {
+                    $.ajax({
+                        url: '{{ url_for("autocomplete") }}'
+                    }).done(function(data) {
+                        $('#job_autocomplete1').autocomplete({
+                            source: data,
+                            minLength: 3
+                        });
+                    });
+                });
+            </script>
+            <script>
+                $(function() {
+                    $.ajax({
+                        url: '{{ url_for("autocomplete") }}'
+                    }).done(function(data) {
+                        $('#job_autocomplete2').autocomplete({
+                            source: data,
+                            minLength: 3
+                        });
+                    });
+                });
+            </script>
+    
+
+    </div>
+</body>
+
+</html>

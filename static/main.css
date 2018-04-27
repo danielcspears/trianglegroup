@@ -1,0 +1,12 @@
+.container.custom-container {
+      margin-left: 100px;
+    }
+
+
+table {
+    border-spacing: 2px;
+}
+
+th, td {
+    padding: 1px;
+}
