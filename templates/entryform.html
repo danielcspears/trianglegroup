@@ -22,7 +22,7 @@
         
         .alert {
             height: 5%;
-            width: 35%;
+            width: 40%;
         }
         
         h6   {color: blue;}
@@ -158,6 +158,12 @@
                     }).done(function(data) {
                         $('#job_autocomplete').autocomplete({
                             source: data,
+                            change: function (event, ui) {
+                if(!ui.item){
+                    $("#job_autocomplete").val("");
+                }
+
+            },
                             minLength: 3
                         });
                     });
@@ -170,6 +176,12 @@
                     }).done(function(data) {
                         $('#job_autocomplete1').autocomplete({
                             source: data,
+                            change: function (event, ui) {
+                if(!ui.item){
+                    $("#job_autocomplete1").val("");
+                }
+
+            },
                             minLength: 3
                         });
                     });
@@ -182,12 +194,23 @@
                     }).done(function(data) {
                         $('#job_autocomplete2').autocomplete({
                             source: data,
+                            change: function (event, ui) {
+                if(!ui.item){
+                    $("#job_autocomplete2").val("");
+                }
+
+            },
                             minLength: 3
                         });
                     });
                 });
             </script>
     
+        
+        
+        
+        
+        
 
     </div>
 </body>

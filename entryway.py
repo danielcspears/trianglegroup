@@ -8,6 +8,9 @@ from pandas.io.json import json_normalize
 from states import states
 from jobs2 import jobs2
 from flask_sqlalchemy import SQLAlchemy 
+import pymysql
+pymysql.install_as_MySQLdb()
+import MySQLdb
 
 application = Flask(__name__)   
 application.config.update(dict(
@@ -25,9 +28,9 @@ from sqlalchemy.orm import sessionmaker
 
     
 class SearchForm(Form):
-    autojob = TextField('Enter Job Title',[validators.Required("Please Enter the First Job Title:")], id='job_autocomplete')
-    autojob2 = TextField('Enter Job Title',[validators.Required("Please Enter the Second Job Title:")], id='job_autocomplete1')
-    autojob3 = TextField('Enter Job Title',[validators.Required("Please Enter the Third Job Title:")], id='job_autocomplete2')
+    autojob = TextField('Enter Job Title',[validators.Required("Please Select from the Suggested List:")], id='job_autocomplete')
+    autojob2 = TextField('Enter Job Title',[validators.Required("Please Select from the Suggested List:")], id='job_autocomplete1')
+    autojob3 = TextField('Enter Job Title',[validators.Required("Please Select from the Suggested List:")], id='job_autocomplete2')
     company = TextField('Enter Company Name:', id ="company")
     compcity = TextField('Enter Company City:', id ="compcity")
     compstate = SelectField('Enter Company State:',choices=states.items(),  default='LA')
@@ -64,6 +67,7 @@ db_name = "tasksx.db"
 table_name = "TASK"
 
 engine = create_engine("sqlite:///%s" % db_name, execution_options={"sqlite_raw_colnames": True})
+#engine = create_engine("mysql://username:password@server/db/%s" % db_name)
 metadata = MetaData(bind=engine)  
 Base = declarative_base(engine)
 
@@ -93,7 +97,7 @@ def job_look():
     if request.method == 'POST':
         if form.validate() == False:
             flash('All fields are required.')
-            return render_template('html5.html', form = form)
+            return render_template('entryform.html', form = form)
         else:
             jobname = request.form['autojob']
             company = smart_title(request.form['company'])
