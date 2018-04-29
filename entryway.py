@@ -8,6 +8,7 @@ from pandas.io.json import json_normalize
 from states import states
 from jobs2 import jobs2
 from flask_sqlalchemy import SQLAlchemy 
+
 import pymysql
 pymysql.install_as_MySQLdb()
 import MySQLdb
@@ -24,7 +25,13 @@ from sqlalchemy import Column, Date, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.engine.url import URL
  
+import config
+#    Performs database connection using database settings from config.py.
+#    Returns sqlalchemy engine instance
+engine = create_engine(URL(**config.DATABASE))
+#    return engine
 
     
 class SearchForm(Form):
@@ -65,9 +72,13 @@ from sqlalchemy.orm import sessionmaker
 
 db_name = "tasksx.db"
 table_name = "TASK"
+#***sqlite version***
+#engine = create_engine("sqlite:///%s" % db_name, execution_options={"sqlite_raw_colnames": True})
 
-engine = create_engine("sqlite:///%s" % db_name, execution_options={"sqlite_raw_colnames": True})
-#engine = create_engine("mysql://username:password@server/db/%s" % db_name)
+#***mysql version***
+#engine = create_engine("mysql+pymysql://root:Daniel12$@localhost/tasksx")
+
+
 metadata = MetaData(bind=engine)  
 Base = declarative_base(engine)
 
